@@ -6,7 +6,7 @@ const App = () => {
   const [message, setMessage] = useState<string>('')
   useEffect(() => {
     const myf = async () => {
-        const response = await fetch('http://localhost:3000/')
+        const response = await fetch('http://localhost:3000/metrics/snapshot')
       const mess = await response.text()
       setMessage(mess)
       }
@@ -20,14 +20,7 @@ const App = () => {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
           {message}
-        </a>
       </header>
     </div>
   );

@@ -22,9 +22,7 @@ services:
     working_dir: /app
     command: yarn dev
     environment:
-      - MEMORY_TEST_DATABASE_USER=${MEMORY_TEST_DATABASE_USER}
-      - MEMORY_TEST_DATABASE_PWD=${MEMORY_TEST_DATABASE_PWD}
-      - MEMORY_TEST_DATABASE_URL=postgresql://database:5432/${MEMORY_TEST_DATABASE}
+      - MEMORY_TEST_DATABASE_URL=${MEMORY_TEST_DATABASE_URL}
     ports:
       - 3000:3000
     depends_on:
