@@ -1,0 +1,40 @@
+version: "3.3"
+services:
+  # database:
+  #   image: postgres:latest
+  #   restart: always
+  #   ports:
+  #     - 5433:5432
+  #   volumes:
+  #     - ./.database_data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_USER=${MEMORY_TEST_DATABASE_USER}
+  #     - POSTGRES_PASSWORD=${MEMORY_TEST_DATABASE_PWD}
+  #     - POSTGRES_DB=${MEMORY_TEST_DATABASE}
+
+  backend:
+    build:
+      context: ./back
+    volumes:
+      - ./apps/backend:/app
+    working_dir: /app
+    command: yarn start
+    # environment:
+    #   - MEMORY_TEST_DATABASE_USER=${MEMORY_TEST_DATABASE_USER}
+    #   - MEMORY_TEST_DATABASE_PWD=${MEMORY_TEST_DATABASE_PWD}
+    #   - MEMORY_TEST_DATABASE_URL=postgresql://database:5432/${MEMORY_TEST_DATABASE}
+    ports:
+      - 3000:3000
+    # depends_on:
+    #   - database
+
+  frontend:
+    build:
+      context: ./front
+    ports:
+      - 4200:4200
+    command: yarn nx run memory:serve:development --host 0.0.0.0
+    volumes:
+      - ./apps/frontend:/app
+    depends_on:
+      - backend
