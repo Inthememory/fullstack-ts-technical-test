@@ -4,8 +4,9 @@ WORKDIR /app
 
 COPY ./package.json ./
 
-RUN yarn install
 RUN yarn global add react-scripts
+RUN yarn install
+
 
 COPY . .
 
