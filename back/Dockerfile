@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY ./package.json ./
 
-RUN yarn install
+RUN yarn global add ts-node
 RUN yarn global add nodemon
+RUN yarn install
+
 
 COPY . .
 
