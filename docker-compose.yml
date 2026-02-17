@@ -6,7 +6,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./.database_data:/var/lib/postgresql/data
+      - ./.database_data:/var/lib/postgresql
       - ./db/structure.sql:/docker-entrypoint-initdb.d/structure.sql
     environment:
       - POSTGRES_USER=${MEMORY_TEST_DATABASE_USER}
