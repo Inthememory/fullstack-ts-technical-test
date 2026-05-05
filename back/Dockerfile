@@ -1,11 +1,9 @@
-FROM node:21-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
 COPY . .
 
-RUN yarn global add ts-node
-RUN yarn global add nodemon
 RUN yarn install
 
 

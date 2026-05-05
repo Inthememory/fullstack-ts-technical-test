@@ -1,10 +1,9 @@
-FROM node:21-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
 COPY . .
 
-RUN yarn global add react-scripts
 RUN yarn install
 
 
