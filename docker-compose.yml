@@ -8,6 +8,7 @@ services:
     volumes:
       - ./.database_data:/var/lib/postgresql
       - ./db/structure.sql:/docker-entrypoint-initdb.d/structure.sql
+      - ./db/booking_boilerplate.sql:/docker-entrypoint-initdb.d/booking_boilerplate.sql
     environment:
       - POSTGRES_USER=${MEMORY_TEST_DATABASE_USER}
       - POSTGRES_PASSWORD=${MEMORY_TEST_DATABASE_PWD}
@@ -18,6 +19,7 @@ services:
       context: ./back
     volumes:
       - ./back:/app
+      - ./db:/db:ro
       - /app/node_modules
     working_dir: /app
     command: yarn dev
