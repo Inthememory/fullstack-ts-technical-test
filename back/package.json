@@ -24,7 +24,8 @@
   "scripts": {
     "build": "yarn tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon index.ts",
+    "dev": "nodemon --exec ts-node index.ts",
+    "dev:docker": "nodemon --legacy-watch --exec ts-node index.ts",
     "test": "jest"
   }
 }

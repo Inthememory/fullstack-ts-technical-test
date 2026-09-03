@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 const App = () => {
-  const [message, setMessage] = useState<string>('')
+  const [message, setMessage] = useState<string>('Connecting to API...')
+
   useEffect(() => {
-    const myf = async () => {
-        const response = await fetch('http://localhost:3000/metrics/snapshot')
-      const mess = await response.text()
-      setMessage(mess)
+    const loadSnapshot = async () => {
+      try {
+        const response = await fetch('/metrics/snapshot')
+        if (!response.ok) {
+          throw new Error(`API returned ${response.status}`)
+        }
+        setMessage(await response.text())
+      } catch {
+        setMessage('Could not connect to API')
       }
-      myf()
+    }
+
+    loadSnapshot()
   }, [])
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Full-stack TypeScript test</h1>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-          {message}
+        <pre>{message}</pre>
       </header>
     </div>
   );

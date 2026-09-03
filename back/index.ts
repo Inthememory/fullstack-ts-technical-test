@@ -1,24 +1,26 @@
-
-import express, { Express, Request, Response , Application } from 'express';
+import express, { Request, Response, Application } from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors'
+import cors from 'cors';
 import metrics from './routes/metrics';
 
-//For env File
 dotenv.config();
 
 const app: Application = express();
 app.use(cors({
-        origin: 'http://localhost:4200'
-    }));
-const port = process.env.PORT || 8000;
+    origin: 'http://localhost:4200'
+}));
+const port = process.env.PORT || 3000;
 
-app.use('/metrics', metrics)
+app.use('/metrics', metrics);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to Express & TypeScript Server');
 });
 
+app.get('/up', (req: Request, res: Response) => {
+    res.json({ ok: true });
+});
+
 app.listen(port, () => {
-    console.log(`Server is Fire at http://localhost:${port}`);
+    console.log(`API listening at http://localhost:${port}`);
 });

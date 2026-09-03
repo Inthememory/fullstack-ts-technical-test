@@ -2,8 +2,20 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+beforeEach(() => {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    text: jest.fn().mockResolvedValue('[{"now":"2026-09-03"}]'),
+  });
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
+test('renders the development instructions', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /full-stack typescript test/i })).toBeInTheDocument();
+  expect(screen.getByText(/save to reload/i)).toBeInTheDocument();
+  expect(await screen.findByText('[{"now":"2026-09-03"}]')).toBeInTheDocument();
 });
